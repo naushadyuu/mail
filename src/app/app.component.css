@@ -1,4 +1,4 @@
-.is-invalid, .was-validated  {
+.ng-touched  {
     
     border-color:red;
     padding-right: 0px;

@@ -17,6 +17,7 @@ export class AppComponent {
   });
   ngOnInit(): void {
     console.log('test>>>', this.mail);
+    console.log('controls', this.mail.controls.name);
   }
   mailJSON() {
     const maildata = {
@@ -29,11 +30,16 @@ export class AppComponent {
   }
   sendMail() {
     console.log('>>data', this.mailJSON());
-    this.http
-      .post('http://localhost:3500/user/sendmail', this.mailJSON())
-      .subscribe((res: any) => {
-        console.log(res);
-      });
-    alert('message sent successfully ');
+    if (this.mail.invalid) {
+      this.mail.markAllAsTouched();
+      alert('Unsuccessfull');
+    } else {
+      this.http
+        .post('http://localhost:350/user/sendmail', this.mailJSON())
+        .subscribe((res: any) => {
+          console.log(res);
+        });
+      alert('message sent successfully ');
+    }
   }
 }
